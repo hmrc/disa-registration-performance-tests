@@ -18,7 +18,7 @@ package uk.gov.hmrc.perftests.disaregistration.util
 
 object RandomDataGenerator {
 
-  def generateRandomISAReference(min: Int, max: Int): String = {
+  def generateRandomZReference(min: Int, max: Int): String = {
     require(min <= max, "min must be <= max")
     val num = scala.util.Random.nextInt(max - min + 1) + min
     f"Z$num%04d"

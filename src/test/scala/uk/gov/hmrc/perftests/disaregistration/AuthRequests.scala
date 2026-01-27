@@ -39,7 +39,7 @@ object AuthRequests extends ServicesConfiguration {
       .formParam("affinityGroup", "Organisation")
       .formParam("enrolment[0].name", "HMRC-DISA-ORG")
       .formParam("enrolment[0].taxIdentifier[0].name", "ZRef")
-      .formParam("enrolment[0].taxIdentifier[0].value", "#{isaManagerReference}")
+      .formParam("enrolment[0].taxIdentifier[0].value", "#{ZReference}")
       .formParam("enrolment[0].state", "Activated")
       .check(status.is(303), status.not(404), status.not(500))
 

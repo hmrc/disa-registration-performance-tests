@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,19 +20,19 @@ import io.gatling.core.Predef.feed
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.disaregistration.AuthRequests.{navigateToAuthLoginStubPage, submitLogin}
 import uk.gov.hmrc.perftests.disaregistration.DisaRegistrationRequests._
-import uk.gov.hmrc.perftests.disaregistration.util.RandomDataGenerator.generateRandomISAReference
+import uk.gov.hmrc.perftests.disaregistration.util.RandomDataGenerator.generateRandomZReference
 
 class DisaRegistrationSimulation extends PerformanceTestRunner {
 
-  def generateISAManagerReference(): Iterator[Map[String, String]] =
+  def generateZReference(): Iterator[Map[String, String]] =
     Iterator.continually(
       Map(
-        "isaManagerReference" -> generateRandomISAReference(1, 500)
+        "ZReference" -> generateRandomZReference(1, 500)
       )
     )
 
   setup("ISA-Manager-Registration", "ISA Manager Registration Journey") withActions (feed(
-    generateISAManagerReference()
+    generateZReference()
   ).actionBuilders: _*) withRequests (
     navigateToAuthLoginStubPage,
     submitLogin,
