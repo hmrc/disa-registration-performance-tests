@@ -22,7 +22,7 @@ import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
 import uk.gov.hmrc.perftests.disaregistration.constants.AppConfig.{disaBaseUrl, disaRoute}
 
-object DisaRegistrationRequests extends ServicesConfiguration {
+object DisaProductsRequests extends ServicesConfiguration {
 
   val navigateToISAProductsPage: HttpRequestBuilder =
     http("Navigate to ISA product Page")

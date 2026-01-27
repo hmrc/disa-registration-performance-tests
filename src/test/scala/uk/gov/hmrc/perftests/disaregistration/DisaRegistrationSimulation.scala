@@ -19,7 +19,7 @@ package uk.gov.hmrc.perftests.disaregistration
 import io.gatling.core.Predef.feed
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.disaregistration.AuthRequests.{navigateToAuthLoginStubPage, submitLogin}
-import uk.gov.hmrc.perftests.disaregistration.DisaRegistrationRequests._
+import uk.gov.hmrc.perftests.disaregistration.DisaProductsRequests._
 import uk.gov.hmrc.perftests.disaregistration.util.RandomDataGenerator.generateRandomZReference
 
 class DisaRegistrationSimulation extends PerformanceTestRunner {
