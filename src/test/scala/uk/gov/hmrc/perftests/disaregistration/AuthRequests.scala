@@ -20,27 +20,23 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
-import uk.gov.hmrc.perftests.disaregistration.constants.AppConfig.{authWizardUrl, redirectionUrl}
+import uk.gov.hmrc.perftests.disaregistration.constants.AppConfig.{authWizardUrl, disaBaseUrl}
 
 object AuthRequests extends ServicesConfiguration {
 
+  val redirectionBaseUrl: String                      = s"$disaBaseUrl/obligations/enrolment/isa/"
   val navigateToAuthLoginStubPage: HttpRequestBuilder =
     http("Navigate to auth login stub page")
       .get(authWizardUrl)
       .check(status.is(200))
 
-  val submitLogin: HttpRequestBuilder =
+  def submitLogin(redirectionUrl: String): HttpRequestBuilder =
     http("Sign in as an ISA Manager")
       .post(authWizardUrl)
-      .formParam("redirectionUrl", redirectionUrl)
+      .formParam("redirectionUrl", s"$redirectionBaseUrl$redirectionUrl")
       .formParam("credentialStrength", "strong")
       .formParam("authorityId", "")
       .formParam("confidenceLevel", "50")
       .formParam("affinityGroup", "Organisation")
-      .formParam("enrolment[0].name", "HMRC-DISA-ORG")
-      .formParam("enrolment[0].taxIdentifier[0].name", "ZRef")
-      .formParam("enrolment[0].taxIdentifier[0].value", "#{ZReference}")
-      .formParam("enrolment[0].state", "Activated")
       .check(status.is(303), status.not(404), status.not(500))
-
 }
