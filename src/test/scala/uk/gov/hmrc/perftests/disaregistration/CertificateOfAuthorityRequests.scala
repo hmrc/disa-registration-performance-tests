@@ -66,7 +66,7 @@ object CertificateOfAuthorityRequests extends ServicesConfiguration {
 
   val getCertificatesOfAuthorityCheckYourAnswersPage: HttpRequestBuilder =
     http("Get Certificates Of Authority Check Your Answers Page")
-      .get(s"$disaBaseUrl/#{certificates-of-authority-check-your-answers}": String)
+      .get(s"$disaBaseUrl/#{certificatesOfAuthorityCheckYourAnswersPage}": String)
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 }

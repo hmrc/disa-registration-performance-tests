@@ -32,7 +32,7 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
       )
     )
 
-  setup("ISA-Manager-Registration", "ISA Manager Registration Journey") withActions (feed(
+  setup("ISA-Manager-Registration", "ISA Manager Registration - DISA Products Journey") withActions (feed(
     generateZReference()
   ).actionBuilders: _*) withRequests (
     navigateToAuthLoginStubPage,
