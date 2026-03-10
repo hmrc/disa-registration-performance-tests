@@ -61,8 +61,7 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     postYesFromTheCertificatesOfAuthorityPage,
     getFCAArticlesPage,
     postSelectionsFromTheFCAArticles,
-    getCertificatesOfAuthorityCheckYourAnswersPage,
-    saveAndContinueFromCertificatesOfAuthorityCheckYourAnswersPage
+    getCertificatesOfAuthorityCheckYourAnswersPage
   )
 
   runSimulation()
