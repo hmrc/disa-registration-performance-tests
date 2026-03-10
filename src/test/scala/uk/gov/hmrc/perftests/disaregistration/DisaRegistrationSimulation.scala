@@ -19,6 +19,7 @@ package uk.gov.hmrc.perftests.disaregistration
 import io.gatling.core.Predef.feed
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.disaregistration.AuthRequests.{navigateToAuthLoginStubPage, submitLogin}
+import uk.gov.hmrc.perftests.disaregistration.CertificateOfAuthorityRequests._
 import uk.gov.hmrc.perftests.disaregistration.DisaProductsRequests._
 import uk.gov.hmrc.perftests.disaregistration.util.RandomDataGenerator.generateRandomZReference
 
@@ -35,7 +36,7 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     generateZReference()
   ).actionBuilders: _*) withRequests (
     navigateToAuthLoginStubPage,
-    submitLogin,
+    submitLogin("isa-products"),
     navigateToISAProductsPage,
     postISAProducts,
     getInnovativeFinancialProductsPage,
@@ -45,6 +46,22 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     getFcaPlatformNumberPage,
     postFcaPlatformNumber,
     getCheckYourAnswersPage
+  )
+
+  setup(
+    "ISA-Manager-Registration-Certificate-Of-Authority",
+    "ISA Manager Registration - Certificate Of Authority Journey"
+  ) withActions (feed(
+    generateZReference()
+  ).actionBuilders: _*) withRequests (
+    navigateToAuthLoginStubPage,
+    submitLogin("eligibility-to-manage-isas"),
+    navigateToEligibilityToManageISAsPage,
+    navigateToCertificatesOfAuthorityPage,
+    postYesFromTheCertificatesOfAuthorityPage,
+    getFCAArticlesPage,
+    postSelectionsFromTheFCAArticles,
+    getCertificatesOfAuthorityCheckYourAnswersPage
   )
 
   runSimulation()

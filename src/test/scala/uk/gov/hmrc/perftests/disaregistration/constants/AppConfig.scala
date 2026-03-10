@@ -19,9 +19,8 @@ package uk.gov.hmrc.perftests.disaregistration.constants
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
 object AppConfig extends ServicesConfiguration {
-  val disaBaseUrl: String    = baseUrlFor("disa-registration-frontend")
-  val disaRoute: String      = "/obligations/enrolment/isa"
-  val authHost: String       = baseUrlFor("auth-login-api")
-  val authWizardUrl: String  = s"$authHost/auth-login-stub/gg-sign-in"
-  val redirectionUrl: String = s"$disaBaseUrl/obligations/enrolment/isa/isa-products"
+  val disaBaseUrl: String   = baseUrlFor("disa-registration-frontend")
+  val disaRoute: String     = "/obligations/enrolment/isa"
+  val authHost: String      = baseUrlFor("auth-login-api")
+  val authWizardUrl: String = s"$authHost/auth-login-stub/gg-sign-in"
 }
