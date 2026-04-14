@@ -16,25 +16,15 @@
 
 package uk.gov.hmrc.perftests.disaregistration
 
-import io.gatling.core.Predef.feed
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.disaregistration.AuthRequests.{navigateToAuthLoginStubPage, submitLogin}
 import uk.gov.hmrc.perftests.disaregistration.CertificateOfAuthorityRequests._
 import uk.gov.hmrc.perftests.disaregistration.DisaProductsRequests._
-import uk.gov.hmrc.perftests.disaregistration.util.RandomDataGenerator.generateRandomZReference
+import uk.gov.hmrc.perftests.disaregistration.LiaisonOfficerRequests._
 
 class DisaRegistrationSimulation extends PerformanceTestRunner {
 
-  def generateZReference(): Iterator[Map[String, String]] =
-    Iterator.continually(
-      Map(
-        "ZReference" -> generateRandomZReference(1, 500)
-      )
-    )
-
-  setup("ISA-Manager-Registration", "ISA Manager Registration - DISA Products Journey") withActions (feed(
-    generateZReference()
-  ).actionBuilders: _*) withRequests (
+  setup("ISA-Manager-Registration", "ISA Manager Registration - DISA Products Journey") withRequests (
     navigateToAuthLoginStubPage,
     submitLogin("isa-products"),
     navigateToISAProductsPage,
@@ -51,9 +41,7 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
   setup(
     "ISA-Manager-Registration-Certificate-Of-Authority",
     "ISA Manager Registration - Certificate Of Authority Journey"
-  ) withActions (feed(
-    generateZReference()
-  ).actionBuilders: _*) withRequests (
+  ) withRequests (
     navigateToAuthLoginStubPage,
     submitLogin("eligibility-to-manage-isas"),
     navigateToEligibilityToManageISAsPage,
@@ -62,6 +50,24 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     getFCAArticlesPage,
     postSelectionsFromTheFCAArticles,
     getCertificatesOfAuthorityCheckYourAnswersPage
+  )
+
+  setup(
+    "ISA-Manager-Registration-Liaison-Officer",
+    "ISA Manager Registration - Liaison Officer Journey"
+  ) withRequests (
+    navigateToAuthLoginStubPage,
+    submitLogin("start"),
+    navigateToStartPage,
+    navigateToLiaisonOfficerNamePage,
+    postLiaisonOfficerNameFromTheLiaisonOfficerNamePage,
+    getLiaisonOfficerEmailPage,
+    postEmailAddressFromTheLiaisonOfficerEmailPage,
+    getLiaisonOfficerPhoneNumberPage,
+    postPhoneNumberFromTheLiaisonOfficerPhoneNumberPage,
+    getLiaisonOfficerCommunicationMethodPage,
+    postCommunicationMethodFromTheLiaisonOfficerCommunicationPage,
+    getAddedLiaisonOfficersCheckYourAnswersPage
   )
 
   runSimulation()
