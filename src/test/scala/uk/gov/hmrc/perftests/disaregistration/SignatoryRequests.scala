@@ -54,14 +54,14 @@ object SignatoryRequests extends ServicesConfiguration {
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val postJobTitleFromTheSignatoryJobTitlePage: HttpRequestBuilder =
-    http("Post Job title From 'The Liaison Officer JOb title' Page")
+    http("Post Job title From 'The Signatory Job title' Page")
       .post(s"$disaBaseUrl$disaRoute/signatory-job-title?id=#{formId}": String)
       .formParam("value", "QA")
       .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val getAddedSignatoryCheckYourAnswersPage: HttpRequestBuilder =
-    http("Get Added Liaison Officers Check Your Answers Page")
+    http("Get Added Signatory Check Your Answers Page")
       .get(s"$disaBaseUrl$disaRoute/check-added-signatory?id=#{formId}": String)
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
