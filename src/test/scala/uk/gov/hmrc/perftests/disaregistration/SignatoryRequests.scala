@@ -47,18 +47,8 @@ object SignatoryRequests extends ServicesConfiguration {
       .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
-  /** make sure to implement below check for all the methods after the navigation ticket *
-    */
-  /** .check( header("location").is(s"$disaRoute/signatory-email?id=#{formId}").saveAs("signatoryEmailPage"))
-    */
-
   val getSignatoryJobTitlePage: HttpRequestBuilder =
     http("Get Signatory Job Title Page")
-      /** Uncomment below and delete existing get request line once after the navigation ticket implemented. This needs
-        * to be added to rest of the all methods in this file
-        */
-      /** .get(s"$disaBaseUrl/#{signatoryEmailPage}?id=#{formId}": String)
-        */
       .get(s"$disaBaseUrl$disaRoute/signatory-job-title?id=#{formId}": String)
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
@@ -69,8 +59,6 @@ object SignatoryRequests extends ServicesConfiguration {
       .formParam("value", "QA")
       .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
-
-
 
   val getAddedSignatoryCheckYourAnswersPage: HttpRequestBuilder =
     http("Get Added Liaison Officers Check Your Answers Page")
