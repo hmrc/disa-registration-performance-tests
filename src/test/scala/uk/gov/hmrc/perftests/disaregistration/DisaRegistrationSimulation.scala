@@ -21,6 +21,7 @@ import uk.gov.hmrc.perftests.disaregistration.AuthRequests.{navigateToAuthLoginS
 import uk.gov.hmrc.perftests.disaregistration.CertificateOfAuthorityRequests._
 import uk.gov.hmrc.perftests.disaregistration.DisaProductsRequests._
 import uk.gov.hmrc.perftests.disaregistration.LiaisonOfficerRequests._
+import uk.gov.hmrc.perftests.disaregistration.SignatoryRequests.{getAddedSignatoryCheckYourAnswersPage, getSignatoryJobTitlePage, navigateToSignatoryNamePage, postJobTitleFromTheSignatoryJobTitlePage, postSignatoryNameFromSignatoryNamePage}
 
 class DisaRegistrationSimulation extends PerformanceTestRunner {
 
@@ -68,6 +69,20 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     getLiaisonOfficerCommunicationMethodPage,
     postCommunicationMethodFromTheLiaisonOfficerCommunicationPage,
     getAddedLiaisonOfficersCheckYourAnswersPage
+  )
+
+  setup(
+    "ISA-Manager-Registration-Signatory",
+    "ISA Manager Registration - Signatory Journey"
+  ) withRequests (
+    navigateToAuthLoginStubPage,
+    submitLogin("start"),
+    navigateToStartPage,
+    navigateToSignatoryNamePage,
+    postSignatoryNameFromSignatoryNamePage,
+    getSignatoryJobTitlePage,
+    postJobTitleFromTheSignatoryJobTitlePage,
+    getAddedSignatoryCheckYourAnswersPage
   )
 
   runSimulation()
