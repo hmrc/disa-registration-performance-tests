@@ -21,6 +21,7 @@ import uk.gov.hmrc.perftests.disaregistration.AuthRequests.{navigateToAuthLoginS
 import uk.gov.hmrc.perftests.disaregistration.CertificateOfAuthorityRequests._
 import uk.gov.hmrc.perftests.disaregistration.DisaProductsRequests._
 import uk.gov.hmrc.perftests.disaregistration.LiaisonOfficerRequests._
+import uk.gov.hmrc.perftests.disaregistration.OrganisationDetailsRequests.{getAddAnotherAddressPage, getChooseAddressPage, getConfirmCorrespondenceAddressPage, getEnterYourOrganisationAddressPage, getFirmReferenceNumberPage, getOrganisationCheckYourAnswersPage, getOrganisationTelephoneNumberPage, getRegisteredAddressCorrespondencePage, getRegisteredToManageISAsPage, getTradingNamePage, getTradingUsingDifferentNamePage, getZReferencePage, postAddAnotherAddressPage, postChooseAddressPage, postConfirmCorrespondenceAddressPage, postEnterYourOrganisationAddressPage, postFirmReferenceNumberPage, postOrganisationTelephoneNumberPage, postRegisteredAddressCorrespondencePage, postTradingNamePage, postTradingUsingDifferentNamePage, postYesFromIsOrganisationRegisteredToManageISAsPage, postZReferencePage}
 import uk.gov.hmrc.perftests.disaregistration.SignatoryRequests.{getAddedSignatoryCheckYourAnswersPage, getSignatoryJobTitlePage, navigateToSignatoryNamePage, postJobTitleFromTheSignatoryJobTitlePage, postSignatoryNameFromSignatoryNamePage}
 
 class DisaRegistrationSimulation extends PerformanceTestRunner {
@@ -85,5 +86,37 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     getAddedSignatoryCheckYourAnswersPage
   )
 
+  setup(
+    "ISA-Manager-Organisation-Details",
+    "ISA Manager Registration - Organisation Details"
+  ) withRequests (
+    navigateToAuthLoginStubPage,
+    submitLogin("start"),
+    navigateToStartPage,
+    getRegisteredToManageISAsPage,
+    postYesFromIsOrganisationRegisteredToManageISAsPage,
+    getZReferencePage,
+    postZReferencePage,
+    getTradingUsingDifferentNamePage,
+    postTradingUsingDifferentNamePage,
+    getTradingNamePage,
+    postTradingNamePage,
+    getFirmReferenceNumberPage,
+    postFirmReferenceNumberPage,
+    getRegisteredAddressCorrespondencePage,
+    postRegisteredAddressCorrespondencePage,
+    getAddAnotherAddressPage,
+    postAddAnotherAddressPage,
+    getChooseAddressPage,
+    postChooseAddressPage,
+    getConfirmCorrespondenceAddressPage,
+    getEnterYourOrganisationAddressPage,
+    postEnterYourOrganisationAddressPage,
+    getConfirmCorrespondenceAddressPage,
+    postConfirmCorrespondenceAddressPage,
+    getOrganisationTelephoneNumberPage,
+    postOrganisationTelephoneNumberPage,
+    getOrganisationCheckYourAnswersPage
+  )
   runSimulation()
 }
