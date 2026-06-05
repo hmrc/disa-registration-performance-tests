@@ -22,13 +22,14 @@ import uk.gov.hmrc.perftests.disaregistration.CertificateOfAuthorityRequests._
 import uk.gov.hmrc.perftests.disaregistration.DisaProductsRequests._
 import uk.gov.hmrc.perftests.disaregistration.LiaisonOfficerRequests._
 import uk.gov.hmrc.perftests.disaregistration.OrganisationDetailsRequests.{getAddAnotherAddressPage, getChooseAddressPage, getConfirmCorrespondenceAddressPage, getEnterYourOrganisationAddressPage, getFirmReferenceNumberPage, getOrganisationCheckYourAnswersPage, getOrganisationTelephoneNumberPage, getRegisteredAddressCorrespondencePage, getRegisteredToManageISAsPage, getTradingNamePage, getTradingUsingDifferentNamePage, getZReferencePage, postAddAnotherAddressPage, postChooseAddressPage, postConfirmCorrespondenceAddressPage, postEnterYourOrganisationAddressPage, postFirmReferenceNumberPage, postOrganisationTelephoneNumberPage, postRegisteredAddressCorrespondencePage, postTradingNamePage, postTradingUsingDifferentNamePage, postYesFromIsOrganisationRegisteredToManageISAsPage, postZReferencePage}
-import uk.gov.hmrc.perftests.disaregistration.SignatoryRequests.{getAddedSignatoryCheckYourAnswersPage, getSignatoryJobTitlePage, navigateToSignatoryNamePage, postJobTitleFromTheSignatoryJobTitlePage, postSignatoryNameFromSignatoryNamePage}
+import uk.gov.hmrc.perftests.disaregistration.SignatoryRequests.{getAddedSignatoryCheckYourAnswersPage, getCanonicalSignatoryNamePage, getSignatoryJobTitlePage, navigateToSignatoryNamePage, postJobTitleFromTheSignatoryJobTitlePage, postSignatoryNameFromSignatoryNamePage}
 
 class DisaRegistrationSimulation extends PerformanceTestRunner {
 
   setup("ISA-Manager-Registration", "ISA Manager Registration - DISA Products Journey") withRequests (
     navigateToAuthLoginStubPage,
-    submitLogin("isa-products"),
+    submitLogin("start"),
+    navigateToStartPage,
     navigateToISAProductsPage,
     postISAProducts,
     getInnovativeFinancialProductsPage,
@@ -45,7 +46,8 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     "ISA Manager Registration - Certificate Of Authority Journey"
   ) withRequests (
     navigateToAuthLoginStubPage,
-    submitLogin("eligibility-to-manage-isas"),
+    submitLogin("start"),
+    navigateToStartPage,
     navigateToEligibilityToManageISAsPage,
     navigateToCertificatesOfAuthorityPage,
     postYesFromTheCertificatesOfAuthorityPage,
@@ -62,6 +64,7 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     submitLogin("start"),
     navigateToStartPage,
     navigateToLiaisonOfficerNamePage,
+    getCanonicalLiaisonOfficerNamePage,
     postLiaisonOfficerNameFromTheLiaisonOfficerNamePage,
     getLiaisonOfficerEmailPage,
     postEmailAddressFromTheLiaisonOfficerEmailPage,
@@ -80,6 +83,7 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     submitLogin("start"),
     navigateToStartPage,
     navigateToSignatoryNamePage,
+    getCanonicalSignatoryNamePage,
     postSignatoryNameFromSignatoryNamePage,
     getSignatoryJobTitlePage,
     postJobTitleFromTheSignatoryJobTitlePage,

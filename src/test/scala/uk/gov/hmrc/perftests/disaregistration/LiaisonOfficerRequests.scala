@@ -32,12 +32,17 @@ object LiaisonOfficerRequests extends ServicesConfiguration {
   val navigateToLiaisonOfficerNamePage: HttpRequestBuilder =
     http("Navigate to Liaison Officer Name Page")
       .get(s"$disaBaseUrl$disaRoute/liaison-officer-name")
-      .check(status.is(200))
+      .check(status.is(303))
       .check(
-        css("form[action*='liaison-officer-name']", "action")
+        header("Location")
           .transform(_.split("id=")(1))
           .saveAs("formId")
       )
+
+  val getCanonicalLiaisonOfficerNamePage: HttpRequestBuilder =
+    http("Navigate to canonical Liaison Officer Name Page")
+      .get(s"$disaBaseUrl$disaRoute/liaison-officer-name?id=#{formId}")
+      .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val postLiaisonOfficerNameFromTheLiaisonOfficerNamePage: HttpRequestBuilder =
@@ -92,5 +97,4 @@ object LiaisonOfficerRequests extends ServicesConfiguration {
     http("Get Added Liaison Officers Check Your Answers Page")
       .get(s"$disaBaseUrl$disaRoute/check-added-liaison-officer?id=#{formId}": String)
       .check(status.is(200))
-      .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 }
