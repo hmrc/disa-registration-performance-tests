@@ -32,18 +32,23 @@ object SignatoryRequests extends ServicesConfiguration {
   val navigateToSignatoryNamePage: HttpRequestBuilder =
     http("Navigate to Signatory Name Page")
       .get(s"$disaBaseUrl$disaRoute/signatory-name")
-      .check(status.is(200))
+      .check(status.is(303))
       .check(
-        css("form[action*='signatory-name']", "action")
+        header("Location")
           .transform(_.split("id=")(1))
           .saveAs("formId")
       )
+
+  val getCanonicalSignatoryNamePage: HttpRequestBuilder =
+    http("Navigate to canonical Signatory Name Page")
+      .get(s"$disaBaseUrl$disaRoute/signatory-name?id=#{formId}")
+      .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val postSignatoryNameFromSignatoryNamePage: HttpRequestBuilder =
     http("Post Signatory Name From 'The Signatory Name' Page")
       .post(s"$disaBaseUrl$disaRoute/signatory-name?id=#{formId}": String)
-      .formParam("value", "liaison officer")
+      .formParam("value", "Signatory Name")
       .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
@@ -64,5 +69,4 @@ object SignatoryRequests extends ServicesConfiguration {
     http("Get Added Signatory Check Your Answers Page")
       .get(s"$disaBaseUrl$disaRoute/check-added-signatory?id=#{formId}": String)
       .check(status.is(200))
-      .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 }
