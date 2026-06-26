@@ -96,7 +96,7 @@ object OrganisationDetailsRequests extends ServicesConfiguration {
   val getRegisteredAddressCorrespondencePage: HttpRequestBuilder =
     http("Get Registered Address Correspondence")
       .get(s"$disaBaseUrl$disaRoute/registered-address-correspondence": String)
-      .check(status.is(303))
+      .check(status.is(200))
 
 
   val postRegisteredAddressCorrespondencePage: HttpRequestBuilder =

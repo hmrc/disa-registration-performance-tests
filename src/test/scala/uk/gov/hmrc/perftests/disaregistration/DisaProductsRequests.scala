@@ -84,7 +84,7 @@ object DisaProductsRequests extends ServicesConfiguration {
       .check(status.is(303))
       .check(header("location").is(s"$disaRoute/isa-products-check-your-answers").saveAs("isaProductsCheckYourAnswers"))
 
-  val getCheckYourAnswersPage: HttpRequestBuilder =
+  val getProductsCheckYourAnswersPage: HttpRequestBuilder =
     http("Get check your answers Page")
       .get(s"$disaBaseUrl/#{isaProductsCheckYourAnswers}": String)
       .check(status.is(200))

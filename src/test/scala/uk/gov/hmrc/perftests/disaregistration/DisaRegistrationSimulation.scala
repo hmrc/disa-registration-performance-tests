@@ -16,13 +16,17 @@
 
 package uk.gov.hmrc.perftests.disaregistration
 
+
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.disaregistration.AuthRequests.{navigateToAuthLoginStubPage, submitLogin}
 import uk.gov.hmrc.perftests.disaregistration.CertificateOfAuthorityRequests._
+import uk.gov.hmrc.perftests.disaregistration.DeclarationRequests.{getConfirmation, getDeclarationForIsaManagers, getFinalCheckYourAnswersPage, postDeclarationForIsaManagers, postFinalCheckYourAnswersPage}
 import uk.gov.hmrc.perftests.disaregistration.DisaProductsRequests._
 import uk.gov.hmrc.perftests.disaregistration.LiaisonOfficerRequests._
 import uk.gov.hmrc.perftests.disaregistration.OrganisationDetailsRequests.{getAddAnotherAddressPage, getChooseAddressPage, getConfirmCorrespondenceAddressPage, getEnterYourOrganisationAddressPage, getFirmReferenceNumberPage, getOrganisationCheckYourAnswersPage, getOrganisationTelephoneNumberPage, getRegisteredAddressCorrespondencePage, getRegisteredToManageISAsPage, getTradingNamePage, getTradingUsingDifferentNamePage, getZReferencePage, postAddAnotherAddressPage, postChooseAddressPage, postConfirmCorrespondenceAddressPage, postEnterYourOrganisationAddressPage, postFirmReferenceNumberPage, postOrganisationTelephoneNumberPage, postRegisteredAddressCorrespondencePage, postTradingNamePage, postTradingUsingDifferentNamePage, postYesFromIsOrganisationRegisteredToManageISAsPage, postZReferencePage}
+import uk.gov.hmrc.perftests.disaregistration.OrganisationEmailRequests.{getEmailVerificationCodePage, getOrganisationEmailAddressPage, getOrganisationEmailCheckYourAnswersPage, postEmailVerificationCodePage, postOrganisationEmailAddressPage}
 import uk.gov.hmrc.perftests.disaregistration.SignatoryRequests.{getAddedSignatoryCheckYourAnswersPage, getCanonicalSignatoryNamePage, getSignatoryJobTitlePage, navigateToSignatoryNamePage, postJobTitleFromTheSignatoryJobTitlePage, postSignatoryNameFromSignatoryNamePage}
+import uk.gov.hmrc.perftests.disaregistration.ThirdPartyRequests.{getAddedThirdPartyCheckYourAnswersPage, getInvestorsFundsUsedByThirdParty, getIsaReturnsManagedByThirdParty, getPercentageOfInvestorsFundsUsed, getProductsManagedByThirdParty, getThirdPartyDetails, postInvestorsFundsUsedByThirdParty, postIsaReturnsManagedByThirdParty, postPercentageOfInvestorsFundsUsed, postProductsManagedByThirdParty, postThirdPartyDetails}
 
 class DisaRegistrationSimulation extends PerformanceTestRunner {
 
@@ -30,6 +34,7 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     navigateToAuthLoginStubPage,
     submitLogin("start"),
     navigateToStartPage,
+    getGrsIncorporatedIdentityCallback,
     navigateToISAProductsPage,
     postISAProducts,
     getInnovativeFinancialProductsPage,
@@ -38,7 +43,7 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     postPeerToPeerLoansPlatform,
     getFcaPlatformNumberPage,
     postFcaPlatformNumber,
-    getCheckYourAnswersPage
+    getProductsCheckYourAnswersPage
   )
 
   setup(
@@ -48,6 +53,7 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     navigateToAuthLoginStubPage,
     submitLogin("start"),
     navigateToStartPage,
+    getGrsIncorporatedIdentityCallback,
     navigateToEligibilityToManageISAsPage,
     navigateToCertificatesOfAuthorityPage,
     postYesFromTheCertificatesOfAuthorityPage,
@@ -63,6 +69,7 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     navigateToAuthLoginStubPage,
     submitLogin("start"),
     navigateToStartPage,
+    getGrsIncorporatedIdentityCallback,
     navigateToLiaisonOfficerNamePage,
     getCanonicalLiaisonOfficerNamePage,
     postLiaisonOfficerNameFromTheLiaisonOfficerNamePage,
@@ -82,6 +89,7 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     navigateToAuthLoginStubPage,
     submitLogin("start"),
     navigateToStartPage,
+    getGrsIncorporatedIdentityCallback,
     navigateToSignatoryNamePage,
     getCanonicalSignatoryNamePage,
     postSignatoryNameFromSignatoryNamePage,
@@ -91,12 +99,49 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
   )
 
   setup(
+    "ISA-Manager-Registration-Third-Party",
+    "ISA Manager Registration - Third Party Journey"
+  ) withRequests (
+    navigateToAuthLoginStubPage,
+    submitLogin("start"),
+    navigateToStartPage,
+    getGrsIncorporatedIdentityCallback,
+    getProductsManagedByThirdParty,
+    postProductsManagedByThirdParty,
+    getThirdPartyDetails,
+    postThirdPartyDetails,
+    getIsaReturnsManagedByThirdParty,
+    postIsaReturnsManagedByThirdParty,
+    getInvestorsFundsUsedByThirdParty,
+    postInvestorsFundsUsedByThirdParty,
+    getPercentageOfInvestorsFundsUsed,
+    postPercentageOfInvestorsFundsUsed,
+    getAddedThirdPartyCheckYourAnswersPage
+  )
+
+  setup(
+    "ISA-Manager-Organisation-Email",
+    "SA Manager Registration - Organisation Email Journey"
+  ) withRequests (
+    navigateToAuthLoginStubPage,
+    submitLogin("start"),
+    navigateToStartPage,
+    getGrsIncorporatedIdentityCallback,
+    getOrganisationEmailAddressPage,
+    postOrganisationEmailAddressPage,
+    getEmailVerificationCodePage,
+    postEmailVerificationCodePage,
+    getOrganisationEmailCheckYourAnswersPage
+  )
+
+  setup(
     "ISA-Manager-Organisation-Details",
     "ISA Manager Registration - Organisation Details"
   ) withRequests (
     navigateToAuthLoginStubPage,
     submitLogin("start"),
     navigateToStartPage,
+    getGrsIncorporatedIdentityCallback,
     getRegisteredToManageISAsPage,
     postYesFromIsOrganisationRegisteredToManageISAsPage,
     getZReferencePage,
@@ -121,6 +166,90 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     getOrganisationTelephoneNumberPage,
     postOrganisationTelephoneNumberPage,
     getOrganisationCheckYourAnswersPage
+  )
+
+  setup(
+    "ISA-Manager-Registration-Details",
+    "ISA Manager Registration Details"
+  ) withRequests (
+    navigateToStartPage,
+    getGrsIncorporatedIdentityCallback,
+    getRegisteredToManageISAsPage,
+    postYesFromIsOrganisationRegisteredToManageISAsPage,
+    getZReferencePage,
+    postZReferencePage,
+    getTradingUsingDifferentNamePage,
+    postTradingUsingDifferentNamePage,
+    getTradingNamePage,
+    postTradingNamePage,
+    getFirmReferenceNumberPage,
+    postFirmReferenceNumberPage,
+    getRegisteredAddressCorrespondencePage,
+    postRegisteredAddressCorrespondencePage,
+    getAddAnotherAddressPage,
+    postAddAnotherAddressPage,
+    getChooseAddressPage,
+    postChooseAddressPage,
+    getConfirmCorrespondenceAddressPage,
+    getEnterYourOrganisationAddressPage,
+    postEnterYourOrganisationAddressPage,
+    getConfirmCorrespondenceAddressPage,
+    postConfirmCorrespondenceAddressPage,
+    getOrganisationTelephoneNumberPage,
+    postOrganisationTelephoneNumberPage,
+    getOrganisationCheckYourAnswersPage,
+    getOrganisationEmailAddressPage,
+    postOrganisationEmailAddressPage,
+    getEmailVerificationCodePage,
+    postEmailVerificationCodePage,
+    getOrganisationEmailCheckYourAnswersPage,
+    postISAProducts,
+    getInnovativeFinancialProductsPage,
+    postInnovativeFinancialProducts,
+    getPeerToPeerLoansPage,
+    postPeerToPeerLoansPlatform,
+    getFcaPlatformNumberPage,
+    postFcaPlatformNumber,
+    getProductsCheckYourAnswersPage,
+    navigateToEligibilityToManageISAsPage,
+    navigateToCertificatesOfAuthorityPage,
+    postYesFromTheCertificatesOfAuthorityPage,
+    getFCAArticlesPage,
+    postSelectionsFromTheFCAArticles,
+    getCertificatesOfAuthorityCheckYourAnswersPage,
+    navigateToLiaisonOfficerNamePage,
+    getCanonicalLiaisonOfficerNamePage,
+    postLiaisonOfficerNameFromTheLiaisonOfficerNamePage,
+    getLiaisonOfficerEmailPage,
+    postEmailAddressFromTheLiaisonOfficerEmailPage,
+    getLiaisonOfficerPhoneNumberPage,
+    postPhoneNumberFromTheLiaisonOfficerPhoneNumberPage,
+    getLiaisonOfficerCommunicationMethodPage,
+    postCommunicationMethodFromTheLiaisonOfficerCommunicationPage,
+    getAddedLiaisonOfficersCheckYourAnswersPage,
+    navigateToSignatoryNamePage,
+    getCanonicalSignatoryNamePage,
+    postSignatoryNameFromSignatoryNamePage,
+    getSignatoryJobTitlePage,
+    postJobTitleFromTheSignatoryJobTitlePage,
+    getAddedSignatoryCheckYourAnswersPage,
+    getProductsManagedByThirdParty,
+    postProductsManagedByThirdParty,
+    getThirdPartyDetails,
+    postThirdPartyDetails,
+    getIsaReturnsManagedByThirdParty,
+    postIsaReturnsManagedByThirdParty,
+    getInvestorsFundsUsedByThirdParty,
+    postInvestorsFundsUsedByThirdParty,
+    getPercentageOfInvestorsFundsUsed,
+    postPercentageOfInvestorsFundsUsed,
+    getAddedThirdPartyCheckYourAnswersPage,
+    getFinalCheckYourAnswersPage,
+    postFinalCheckYourAnswersPage,
+    getDeclarationForIsaManagers,
+    postDeclarationForIsaManagers,
+    getConfirmation
+
   )
   runSimulation()
 }
