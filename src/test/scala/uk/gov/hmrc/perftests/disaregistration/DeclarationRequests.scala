@@ -24,27 +24,22 @@ import uk.gov.hmrc.perftests.disaregistration.constants.AppConfig.{disaBaseUrl, 
 
 object DeclarationRequests extends ServicesConfiguration {
 
-
-
   val getFinalCheckYourAnswersPage: HttpRequestBuilder =
     http("Get final check your answers page")
       .get(s"$disaBaseUrl$disaRoute/check-your-answers")
       .check(status.is(200))
 
-
   val postFinalCheckYourAnswersPage: HttpRequestBuilder =
     http("Post  final check your answers page")
       .post(s"$disaBaseUrl$disaRoute/check-your-answers": String)
       .formParam("csrfToken", "#{csrfToken}")
-      .check(status.is(303)
-      )
+      .check(status.is(303))
 
   val getDeclarationForIsaManagers: HttpRequestBuilder =
     http("Get Declaration For Isa Managers Page")
       .get(s"$disaBaseUrl$disaRoute/declaration-for-isa-managers": String)
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
-
 
   val postDeclarationForIsaManagers: HttpRequestBuilder =
     http("Post Declaration For Isa Managers")

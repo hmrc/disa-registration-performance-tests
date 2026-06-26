@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.perftests.disaregistration
 
-
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.disaregistration.AuthRequests.{navigateToAuthLoginStubPage, submitLogin}
 import uk.gov.hmrc.perftests.disaregistration.CertificateOfAuthorityRequests._
@@ -249,7 +248,6 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     getDeclarationForIsaManagers,
     postDeclarationForIsaManagers,
     getConfirmation
-
   )
   runSimulation()
 }

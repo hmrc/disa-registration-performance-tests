@@ -24,7 +24,6 @@ import uk.gov.hmrc.perftests.disaregistration.constants.AppConfig.{disaBaseUrl, 
 
 object OrganisationEmailRequests extends ServicesConfiguration {
 
-
   val getOrganisationEmailAddressPage: HttpRequestBuilder =
     http("Get Organisation Email Address Page")
       .get(s"$disaBaseUrl$disaRoute/organisation-email-address": String)
@@ -53,7 +52,6 @@ object OrganisationEmailRequests extends ServicesConfiguration {
       .formParam("value", "ABCDEF")
       .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
-
 
   val getOrganisationEmailCheckYourAnswersPage: HttpRequestBuilder =
     http("Get Organisation Check Your Answers Page")

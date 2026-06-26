@@ -24,8 +24,6 @@ import uk.gov.hmrc.perftests.disaregistration.constants.AppConfig.{disaBaseUrl, 
 
 object ThirdPartyRequests extends ServicesConfiguration {
 
-
-
   val getProductsManagedByThirdParty: HttpRequestBuilder =
     http("Navigate to products managed by third party")
       .get(s"$disaBaseUrl$disaRoute/products-managed-by-third-party")
@@ -47,7 +45,6 @@ object ThirdPartyRequests extends ServicesConfiguration {
       .get(s"$disaBaseUrl$disaRoute/third-party-details?id=#{formId}": String)
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
-
 
   val postThirdPartyDetails: HttpRequestBuilder =
     http("Get Third Party details from Third party details Page")
