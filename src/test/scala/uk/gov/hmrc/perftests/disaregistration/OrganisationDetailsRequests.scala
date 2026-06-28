@@ -24,7 +24,6 @@ import uk.gov.hmrc.perftests.disaregistration.constants.AppConfig.{disaBaseUrl, 
 
 object OrganisationDetailsRequests extends ServicesConfiguration {
 
-
   val getRegisteredToManageISAsPage: HttpRequestBuilder =
     http("Get Registered to Manage ISAsPage")
       .get(s"$disaBaseUrl$disaRoute/registered-isa-manager": String)
@@ -96,8 +95,7 @@ object OrganisationDetailsRequests extends ServicesConfiguration {
   val getRegisteredAddressCorrespondencePage: HttpRequestBuilder =
     http("Get Registered Address Correspondence")
       .get(s"$disaBaseUrl$disaRoute/registered-address-correspondence": String)
-      .check(status.is(303))
-
+      .check(status.is(200))
 
   val postRegisteredAddressCorrespondencePage: HttpRequestBuilder =
     http("Post No from Registered Address Correspondence Page")
@@ -139,10 +137,10 @@ object OrganisationDetailsRequests extends ServicesConfiguration {
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val getEnterYourOrganisationAddressPage: HttpRequestBuilder =
-  http("Get Enter Your Organisation Address Page")
-    .get(s"$disaBaseUrl$disaRoute/enter-your-organisation-address": String)
-    .check(status.is(200))
-    .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
+    http("Get Enter Your Organisation Address Page")
+      .get(s"$disaBaseUrl$disaRoute/enter-your-organisation-address": String)
+      .check(status.is(200))
+      .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val postEnterYourOrganisationAddressPage: HttpRequestBuilder =
     http("Post Enter Your Organisation Address Page")
