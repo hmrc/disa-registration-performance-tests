@@ -29,11 +29,6 @@ object LiaisonOfficerRequests extends ServicesConfiguration {
       .get(s"$disaBaseUrl$disaRoute/start")
       .check(status.is(303))
 
-  val getGrsIncorporatedIdentityCallback: HttpRequestBuilder =
-    http("Get GRS Incorporated Identity Callback")
-      .get(s"$disaBaseUrl$disaRoute/incorporated-identity-callback?journeyId=grs-create-journey-success")
-      .check(status.is(303))
-
   val navigateToLiaisonOfficerNamePage: HttpRequestBuilder =
     http("Navigate to Liaison Officer Name Page")
       .get(s"$disaBaseUrl$disaRoute/liaison-officer-name")
