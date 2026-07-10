@@ -61,33 +61,33 @@ object ThirdPartyRequests extends ServicesConfiguration {
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val postIsaReturnsManagedByThirdParty: HttpRequestBuilder =
-    http("Post Isa Returns Managed By Third Party")
+    http("Post ISA Returns Managed By Third Party Page")
       .post(s"$disaBaseUrl$disaRoute/isa-returns-managed-by-third-party?id=#{formId}": String)
       .formParam("value", "yes")
       .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val getInvestorsFundsUsedByThirdParty: HttpRequestBuilder =
-    http("Get Isa Returns Managed By Third Party Page")
+    http("Get Investor Funds Used By Third Party Page")
       .get(s"$disaBaseUrl$disaRoute/investor-funds-used-by-third-party?id=#{formId}": String)
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val postInvestorsFundsUsedByThirdParty: HttpRequestBuilder =
-    http("Post Isa Returns Managed By Third Party")
+    http("Post Investor Funds User By Third Party Page")
       .post(s"$disaBaseUrl$disaRoute/investor-funds-used-by-third-party?id=#{formId}": String)
       .formParam("value", "yes")
       .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val getPercentageOfInvestorsFundsUsed: HttpRequestBuilder =
-    http("Get Isa Returns Managed By Third Party Page")
+    http("Get Percentage Investor Funds Used Page")
       .get(s"$disaBaseUrl$disaRoute/percentage-of-investor-funds-used?id=#{formId}": String)
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val postPercentageOfInvestorsFundsUsed: HttpRequestBuilder =
-    http("Post Isa Returns Managed By Third Party")
+    http("Post Percentage Investor Funds Used Page")
       .post(s"$disaBaseUrl$disaRoute/percentage-of-investor-funds-used?id=#{formId}": String)
       .formParam("value", "20")
       .formParam("csrfToken", "#{csrfToken}")

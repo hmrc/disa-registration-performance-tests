@@ -31,7 +31,7 @@ object DisaProductsRequests extends ServicesConfiguration {
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val postISAProducts: HttpRequestBuilder =
-    http("Post ISA products")
+    http("Post ISA Products Page")
       .post(s"$disaBaseUrl$disaRoute/isa-products": String)
       .formParam("value[3]", "stocksAndSharesJuniorIsas")
       .formParam("value[4]", "innovativeFinanceIsas")
@@ -48,7 +48,7 @@ object DisaProductsRequests extends ServicesConfiguration {
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val postInnovativeFinancialProducts: HttpRequestBuilder =
-    http("Post ISA products")
+    http("Post Innovative Finance Products Page")
       .post(s"$disaBaseUrl/#{innovativeFinancialProductsPage}": String)
       .formParam("value[1]", "peerToPeerLoansUsingAPlatformWith36HPermissions")
       .formParam("value[2]", "crowdfundedDebentures")

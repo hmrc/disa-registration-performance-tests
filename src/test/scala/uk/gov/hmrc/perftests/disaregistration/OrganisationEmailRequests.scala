@@ -54,7 +54,7 @@ object OrganisationEmailRequests extends ServicesConfiguration {
       .check(status.is(303))
 
   val getOrganisationEmailCheckYourAnswersPage: HttpRequestBuilder =
-    http("Get Organisation Check Your Answers Page")
+    http("Get Organisation Email Check Your Answers Page")
       .get(s"$disaBaseUrl$disaRoute/organisation-email-check-your-answers": String)
       .check(status.is(200))
 
