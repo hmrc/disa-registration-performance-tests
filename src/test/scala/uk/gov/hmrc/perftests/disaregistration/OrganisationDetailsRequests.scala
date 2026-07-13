@@ -25,7 +25,7 @@ import uk.gov.hmrc.perftests.disaregistration.constants.AppConfig.{disaBaseUrl, 
 object OrganisationDetailsRequests extends ServicesConfiguration {
 
   val getRegisteredToManageISAsPage: HttpRequestBuilder =
-    http("Get Registered to Manage ISAsPage")
+    http("Get Registered to Manage ISAs Page")
       .get(s"$disaBaseUrl$disaRoute/registered-isa-manager": String)
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
@@ -60,7 +60,7 @@ object OrganisationDetailsRequests extends ServicesConfiguration {
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val postTradingUsingDifferentNamePage: HttpRequestBuilder =
-    http("Post Yes from Trading using different mame Page")
+    http("Post Yes from Trading using different Name Page")
       .post(s"$disaBaseUrl$disaRoute/trading-using-different-name": String)
       .formParam("value", "yes")
       .formParam("csrfToken", "#{csrfToken}")
@@ -73,27 +73,27 @@ object OrganisationDetailsRequests extends ServicesConfiguration {
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val postTradingNamePage: HttpRequestBuilder =
-    http("Post trading name from Trading mame Page")
+    http("Post Trading Name Page")
       .post(s"$disaBaseUrl$disaRoute/trading-name": String)
       .formParam("value", "Trading Name")
       .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val getFirmReferenceNumberPage: HttpRequestBuilder =
-    http("Get Firm reference number Page")
+    http("Get Firm Reference Number Page")
       .get(s"$disaBaseUrl$disaRoute/firm-reference-number": String)
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val postFirmReferenceNumberPage: HttpRequestBuilder =
-    http("Post FRN from Firm reference number Page")
+    http("Post FRN from Firm Reference Number Page")
       .post(s"$disaBaseUrl$disaRoute/firm-reference-number": String)
       .formParam("value", "7777777")
       .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val getRegisteredAddressCorrespondencePage: HttpRequestBuilder =
-    http("Get Registered Address Correspondence")
+    http("Get Registered Address Correspondence PAGE")
       .get(s"$disaBaseUrl$disaRoute/registered-address-correspondence": String)
       .check(status.is(200))
 
@@ -105,7 +105,7 @@ object OrganisationDetailsRequests extends ServicesConfiguration {
       .check(status.is(303))
 
   val getAddAnotherAddressPage: HttpRequestBuilder =
-    http("Get Add another address Page")
+    http("Get Add Another Address Page")
       .get(s"$disaBaseUrl$disaRoute/add-another-address": String)
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
@@ -118,7 +118,7 @@ object OrganisationDetailsRequests extends ServicesConfiguration {
       .check(status.is(303))
 
   val getChooseAddressPage: HttpRequestBuilder =
-    http("Get Choose address Page")
+    http("Get Choose Address Page")
       .get(s"$disaBaseUrl$disaRoute/choose-address": String)
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
@@ -136,6 +136,12 @@ object OrganisationDetailsRequests extends ServicesConfiguration {
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
+  val postConfirmCorrespondenceAddressPage: HttpRequestBuilder =
+    http("Post Confirm Correspondence Address Page")
+      .post(s"$disaBaseUrl$disaRoute/confirm-correspondence-address": String)
+      .formParam("csrfToken", "#{csrfToken}")
+      .check(status.is(303))
+
   val getEnterYourOrganisationAddressPage: HttpRequestBuilder =
     http("Get Enter Your Organisation Address Page")
       .get(s"$disaBaseUrl$disaRoute/enter-your-organisation-address": String)
@@ -152,14 +158,8 @@ object OrganisationDetailsRequests extends ServicesConfiguration {
       .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
-  val postConfirmCorrespondenceAddressPage: HttpRequestBuilder =
-    http("Post Confirm Correspondence Address Page")
-      .post(s"$disaBaseUrl$disaRoute/confirm-correspondence-address": String)
-      .formParam("csrfToken", "#{csrfToken}")
-      .check(status.is(303))
-
   val getOrganisationTelephoneNumberPage: HttpRequestBuilder =
-    http("Get Organisation telephone number Page")
+    http("Get Organisation Telephone Number Page")
       .get(s"$disaBaseUrl$disaRoute/organisation-telephone-number": String)
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
