@@ -30,7 +30,6 @@ object CompanyTypeRequests extends ServicesConfiguration {
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
-
   val postCompanyTypeFromCompanyTypePage: HttpRequestBuilder =
     http("Post Company Type From The Company type Page")
       .post(s"$disaBaseUrl$disaRoute/company-type": String)
