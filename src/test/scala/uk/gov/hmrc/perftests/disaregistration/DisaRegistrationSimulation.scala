@@ -19,9 +19,10 @@ package uk.gov.hmrc.perftests.disaregistration
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.disaregistration.AuthRequests.{navigateToAuthLoginStubPage, submitLogin}
 import uk.gov.hmrc.perftests.disaregistration.CertificateOfAuthorityRequests._
+import uk.gov.hmrc.perftests.disaregistration.CompanyTypeRequests.{navigateToCompanyTypePage, postCompanyTypeFromCompanyTypePage}
 import uk.gov.hmrc.perftests.disaregistration.DeclarationRequests.{getConfirmation, getDeclarationForIsaManagers, getFinalCheckYourAnswersPage, postDeclarationForIsaManagers, postFinalCheckYourAnswersPage}
 import uk.gov.hmrc.perftests.disaregistration.DisaProductsRequests._
-import uk.gov.hmrc.perftests.disaregistration.GrsRequests.getGrsIncorporatedIdentityCallback
+import uk.gov.hmrc.perftests.disaregistration.GrsRequests.{getGrsIncorporatedIdentityCallback, navigateToGRSStartPage}
 import uk.gov.hmrc.perftests.disaregistration.LiaisonOfficerRequests._
 import uk.gov.hmrc.perftests.disaregistration.OrganisationDetailsRequests.{getAddAnotherAddressPage, getChooseAddressPage, getConfirmCorrespondenceAddressPage, getEnterYourOrganisationAddressPage, getFirmReferenceNumberPage, getOrganisationCheckYourAnswersPage, getOrganisationTelephoneNumberPage, getRegisteredAddressCorrespondencePage, getRegisteredToManageISAsPage, getTradingNamePage, getTradingUsingDifferentNamePage, getZReferencePage, postAddAnotherAddressPage, postChooseAddressPage, postConfirmCorrespondenceAddressPage, postEnterYourOrganisationAddressPage, postFirmReferenceNumberPage, postOrganisationTelephoneNumberPage, postRegisteredAddressCorrespondencePage, postTradingNamePage, postTradingUsingDifferentNamePage, postYesFromIsOrganisationRegisteredToManageISAsPage, postZReferencePage}
 import uk.gov.hmrc.perftests.disaregistration.OrganisationEmailRequests.{getEmailVerificationCodePage, getOrganisationEmailAddressPage, getOrganisationEmailCheckYourAnswersPage, postEmailVerificationCodePage, postOrganisationEmailAddressPage}
@@ -32,8 +33,10 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
 
   setup("ISA-Manager-Registration", "ISA Manager Registration - DISA Products Journey") withRequests (
     navigateToAuthLoginStubPage,
-    submitLogin("start"),
-    navigateToStartPage,
+    submitLogin("company-type"),
+    navigateToCompanyTypePage,
+    postCompanyTypeFromCompanyTypePage,
+    navigateToGRSStartPage,
     getGrsIncorporatedIdentityCallback,
     navigateToISAProductsPage,
     postISAProducts,
@@ -51,8 +54,10 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     "ISA Manager Registration - Certificate Of Authority Journey"
   ) withRequests (
     navigateToAuthLoginStubPage,
-    submitLogin("start"),
-    navigateToStartPage,
+    submitLogin("company-type"),
+    navigateToCompanyTypePage,
+    postCompanyTypeFromCompanyTypePage,
+    navigateToGRSStartPage,
     getGrsIncorporatedIdentityCallback,
     navigateToEligibilityToManageISAsPage,
     navigateToCertificatesOfAuthorityPage,
@@ -67,8 +72,10 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     "ISA Manager Registration - Liaison Officer Journey"
   ) withRequests (
     navigateToAuthLoginStubPage,
-    submitLogin("start"),
-    navigateToStartPage,
+    submitLogin("company-type"),
+    navigateToCompanyTypePage,
+    postCompanyTypeFromCompanyTypePage,
+    navigateToGRSStartPage,
     getGrsIncorporatedIdentityCallback,
     navigateToLiaisonOfficerNamePage,
     getCanonicalLiaisonOfficerNamePage,
@@ -87,8 +94,10 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     "ISA Manager Registration - Signatory Journey"
   ) withRequests (
     navigateToAuthLoginStubPage,
-    submitLogin("start"),
-    navigateToStartPage,
+    submitLogin("company-type"),
+    navigateToCompanyTypePage,
+    postCompanyTypeFromCompanyTypePage,
+    navigateToGRSStartPage,
     getGrsIncorporatedIdentityCallback,
     navigateToSignatoryNamePage,
     getCanonicalSignatoryNamePage,
@@ -103,8 +112,10 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     "ISA Manager Registration - Third Party Journey"
   ) withRequests (
     navigateToAuthLoginStubPage,
-    submitLogin("start"),
-    navigateToStartPage,
+    submitLogin("company-type"),
+    navigateToCompanyTypePage,
+    postCompanyTypeFromCompanyTypePage,
+    navigateToGRSStartPage,
     getGrsIncorporatedIdentityCallback,
     getProductsManagedByThirdParty,
     postProductsManagedByThirdParty,
@@ -124,8 +135,10 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     "SA Manager Registration - Organisation Email Journey"
   ) withRequests (
     navigateToAuthLoginStubPage,
-    submitLogin("start"),
-    navigateToStartPage,
+    submitLogin("company-type"),
+    navigateToCompanyTypePage,
+    postCompanyTypeFromCompanyTypePage,
+    navigateToGRSStartPage,
     getGrsIncorporatedIdentityCallback,
     getOrganisationEmailAddressPage,
     postOrganisationEmailAddressPage,
@@ -139,8 +152,10 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     "ISA Manager Registration - Organisation Details"
   ) withRequests (
     navigateToAuthLoginStubPage,
-    submitLogin("start"),
-    navigateToStartPage,
+    submitLogin("company-type"),
+    navigateToCompanyTypePage,
+    postCompanyTypeFromCompanyTypePage,
+    navigateToGRSStartPage,
     getGrsIncorporatedIdentityCallback,
     getRegisteredToManageISAsPage,
     postYesFromIsOrganisationRegisteredToManageISAsPage,
@@ -171,7 +186,11 @@ class DisaRegistrationSimulation extends PerformanceTestRunner {
     "ISA-Manager-Registration-Details",
     "ISA Manager Registration Details"
   ) withRequests (
-    navigateToStartPage,
+    navigateToAuthLoginStubPage,
+    submitLogin("company-type"),
+    navigateToCompanyTypePage,
+    postCompanyTypeFromCompanyTypePage,
+    navigateToGRSStartPage,
     getGrsIncorporatedIdentityCallback,
     getRegisteredToManageISAsPage,
     postYesFromIsOrganisationRegisteredToManageISAsPage,

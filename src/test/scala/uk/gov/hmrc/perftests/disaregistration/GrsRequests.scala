@@ -24,6 +24,11 @@ import uk.gov.hmrc.perftests.disaregistration.constants.AppConfig.{disaBaseUrl, 
 
 object GrsRequests extends ServicesConfiguration {
 
+  val navigateToGRSStartPage: HttpRequestBuilder =
+    http("Navigate to GRS Start Page")
+      .get(s"$disaBaseUrl$disaRoute/start")
+      .check(status.is(303))
+
   val getGrsIncorporatedIdentityCallback: HttpRequestBuilder =
     http("Get GRS Incorporated Identity Callback")
       .get(s"$disaBaseUrl$disaRoute/incorporated-identity-callback?journeyId=grs-create-journey-success")
