@@ -24,11 +24,6 @@ import uk.gov.hmrc.perftests.disaregistration.constants.AppConfig.{disaBaseUrl, 
 
 object LiaisonOfficerRequests extends ServicesConfiguration {
 
-  val navigateToStartPage: HttpRequestBuilder =
-    http("Navigate to Start Page")
-      .get(s"$disaBaseUrl$disaRoute/start")
-      .check(status.is(303))
-
   val navigateToLiaisonOfficerNamePage: HttpRequestBuilder =
     http("Navigate to Liaison Officer Name Page")
       .get(s"$disaBaseUrl$disaRoute/liaison-officer-name")
