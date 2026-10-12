@@ -20,7 +20,7 @@ import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
 object AppConfig extends ServicesConfiguration {
   val disaBaseUrl: String   = baseUrlFor("disa-registration-frontend")
-  val disaRoute: String     = "/obligations/enrolment/isa"
+  val disaRoute: String     = "/register-for-manage-isas"
   val authHost: String      = baseUrlFor("auth-login-api")
   val authWizardUrl: String = s"$authHost/auth-login-stub/gg-sign-in"
 }
